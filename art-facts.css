@@ -29,6 +29,7 @@ h1 span.facts {
 
 div.picframe {
     height: 400px;
+    width: 300px;
     float: left;
     margin-right: 18pt;
 }
@@ -36,8 +37,6 @@ div.picframe {
 div.picframe img {
     height: 100%;
     display: block;
-    margin-right: auto;
-    margin-left: auto;
 }
 
 div.body {
