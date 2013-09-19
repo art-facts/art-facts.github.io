@@ -1,5 +1,25 @@
+@import url(http://fonts.googleapis.com/css?family=Ruthie|Special+Elite);
+
 h1 {
     text-align: center;
+}
+
+h1 span.art-name {
+    font-family: Ruthie, handwriting;
+    font-size: 250%;
+    display: inline-block;
+    transform: rotate(-8deg);
+    -webkit-transform: rotate(-8deg);
+    -moz-transform: rotate(-8deg);
+    -ms-transform: rotate(-8deg);
+}
+
+h1 span.facts {
+    font-family: 'Special Elite', sans-serif;
+    font-size: 75%;
+    position: relative;
+    bottom: -12pt;
+    left: -32pt;
 }
 
 div.picframe {
