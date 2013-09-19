@@ -32,6 +32,7 @@ div.picframe {
     width: 300px;
     float: left;
     margin-right: 18pt;
+    margin-bottom: 36pt;
 }
 
 div.picframe img {
@@ -72,4 +73,13 @@ a.button:after {
 
 #admin_link {
     display: none;
+}
+
+.adlinks {
+    margin-top: 18pt;
+}
+
+.footer_ad {
+    margin-left: 36px;
+    clear: both;
 }
