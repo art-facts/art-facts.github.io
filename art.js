@@ -19,31 +19,9 @@ function startup() {
 
     $('#submit_link').click(function() { $('#submit_form').toggle(); });
 
-    $('#reload_link').click(function() { window.location.reload(); });
+    $('#reload_link').click(function() { pickFact(); });
 
-    db.child('total_votes').once('value', function(snap) {
-        var total_votes = snap.val();
-
-        var x = Math.floor(Math.random() * total_votes);
-        db.child('facts').once('value', function(snap) {
-            snap.forEach(function(snap) {
-                var ref = snap.ref();
-                var fact = snap.val();
-                if(x < fact.votes) {
-                    $('#current_fact').html(fact.fact);
-                    $('#upvote_button').click(function () {
-                        ref.child('votes').transaction(add1);
-                        db.child('total_votes').transaction(add1);
-                        $('#upvote_button').attr('disabled', 'disabled');
-                    });
-                    return true;
-                }
-                else {
-                    x -= fact.votes;
-                }
-            });
-        });
-    });
+    pickFact();
 
     auth = new FirebaseSimpleLogin(db, function(error, user) {
         if(user) {
@@ -61,6 +39,33 @@ function startup() {
                                   10);
             }
         }
+    });
+}
+
+function pickFact() {
+    db.child('total_votes').once('value', function(snap) {
+        var total_votes = snap.val();
+
+        var x = Math.floor(Math.random() * total_votes);
+        db.child('facts').once('value', function(snap) {
+            snap.forEach(function(snap) {
+                var ref = snap.ref();
+                var fact = snap.val();
+                if(x < fact.votes && fact.fact != $('#current_fact').html()) {
+                    $('#current_fact').html(fact.fact);
+                    $('#upvote_button').off('click');
+                    $('#upvote_button').click(function () {
+                        ref.child('votes').transaction(add1);
+                        db.child('total_votes').transaction(add1);
+                        $('#upvote_button').attr('disabled', 'disabled');
+                    }).removeAttr('disabled');
+                    return true;
+                }
+                else {
+                    x -= fact.votes;
+                }
+            });
+        });
     });
 }
 
