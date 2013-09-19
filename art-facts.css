@@ -1,4 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Ruthie|Special+Elite);
+@import url(http://fonts.googleapis.com/css?family=Ruthie|Special+Elite|Oxygen);
+
+body {
+    background: #f2de91;
+    font-family: Oxygen, sans-serif;
+}
 
 h1 {
     text-align: center;
@@ -42,6 +47,12 @@ div.body {
 }
 
 p.fact {
+    font-size: 125%;
+}
+
+p.fact:first-letter {
+    font-family: Ruthie, handwriting;
+    font-size: 200%;
 }
 
 a.button:before {
