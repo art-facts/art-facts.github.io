@@ -46,11 +46,13 @@ function pickFact() {
     db.child('total_votes').once('value', function(snap) {
         var total_votes = snap.val();
 
-        var x = Math.floor(Math.random() * total_votes);
+        var x = Math.random() * total_votes;
+        //console.log("=== " + x + " / " + total_votes);
         db.child('facts').once('value', function(snap) {
             snap.forEach(function(snap) {
                 var ref = snap.ref();
                 var fact = snap.val();
+                //console.log(x + " <? " + fact.votes);
                 if(x < fact.votes && fact.fact != $('#current_fact').html()) {
                     $('#current_fact').html(fact.fact);
                     $('#upvote_button').off('click');
