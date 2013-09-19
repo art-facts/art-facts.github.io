@@ -17,6 +17,8 @@ function startup() {
         alert("Thank you for your submission. Your fact will be added to the database once it has been verified for accuracy.");
     });
 
+    $('#submit_link').click(function() { $('#submit_form').toggle(); });
+
     db.child('total_votes').once('value', function(snap) {
         var total_votes = snap.val();
 
@@ -41,10 +43,22 @@ function startup() {
         });
     });
 
-
     auth = new FirebaseSimpleLogin(db, function(error, user) {
         if(user) {
             enableModerator();
+            $('#admin_link').html('logout').click(function() {
+                location.hash = "";
+                $('#admin_link').hide();
+                $('#verify').hide();
+                auth.logout();
+            }).show();
+        }
+        else {
+            console.info("" + location.hash);
+            if("" + location.hash == "#admin") {
+                window.setTimeout(function () { auth.login('persona'); },
+                                  10);
+            }
         }
     });
 }

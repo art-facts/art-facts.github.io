@@ -24,6 +24,8 @@ h1 span.facts {
 
 div.picframe {
     height: 400px;
+    float: left;
+    margin-right: 18pt;
 }
 
 div.picframe img {
@@ -40,9 +42,24 @@ div.body {
 }
 
 p.fact {
-    text-align: center;
+}
+
+a.button:before {
+    content: "[";
+}
+
+a.button:after {
+    content: "]";
 }
 
 #verify {
+    display: none;
+}
+
+#submit_form {
+    display: none;
+}
+
+#admin_link {
     display: none;
 }

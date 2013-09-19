@@ -14,19 +14,28 @@
       <div class="picframe">
         <img src="pics/art-1.jpg">
       </div>
-      <p id="current_fact" class="fact"></p>
-      <button id="upvote_button">Upvote</button>
 
-      <div id="submit_form">
-        <textarea id="submit_text" rows="5" cols="60"></textarea>
-        <button id="submit_button">Submit</button>
-      </div>
+      <div class="content">
+        <p id="current_fact" class="fact"></p>
+        <button id="upvote_button">Upvote</button>
+        
+        <a class="button" id="submit_link" href="javascript:;">submit a fact</a>
+        <a class="button" id="admin_link" href="javascript:;">logout</a>
 
-      <div id="verify">
-        <h2>Verify fact submissions</h2>
-        <ul id="unverified_list"></ul>
+        <div id="submit_form">
+          <h2>Submit a fact</h2>
+          <textarea id="submit_text" rows="5" cols="60"></textarea>
+          <button id="submit_button">Submit</button>
+        </div>
+        
+        <div id="verify">
+          <h2>Verify fact submissions</h2>
+          <ul id="unverified_list"></ul>
+        </div>
       </div>
     </div>
+
+
     <script src="http://code.jquery.com/jquery.js"></script>
     <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script type='text/javascript'
