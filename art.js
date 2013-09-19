@@ -19,6 +19,8 @@ function startup() {
 
     $('#submit_link').click(function() { $('#submit_form').toggle(); });
 
+    $('#reload_link').click(function() { window.location.reload(); });
+
     db.child('total_votes').once('value', function(snap) {
         var total_votes = snap.val();
 
@@ -54,7 +56,6 @@ function startup() {
             }).show();
         }
         else {
-            console.info("" + location.hash);
             if("" + location.hash == "#admin") {
                 window.setTimeout(function () { auth.login('persona'); },
                                   10);
