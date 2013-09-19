@@ -1,6 +1,8 @@
 var db = undefined;
 var auth = undefined;
 
+function add1(x) { return x + 1; }
+
 function startup() {
     db = new Firebase("https://art-facts.firebaseio.com/");
 
@@ -14,6 +16,31 @@ function startup() {
         txt.val("");
         alert("Thank you for your submission. Your fact will be added to the database once it has been verified for accuracy.");
     });
+
+    db.child('total_votes').once('value', function(snap) {
+        var total_votes = snap.val();
+
+        var x = Math.floor(Math.random() * total_votes);
+        db.child('facts').once('value', function(snap) {
+            snap.forEach(function(snap) {
+                var ref = snap.ref();
+                var fact = snap.val();
+                if(x < fact.votes) {
+                    $('#current_fact').html(fact.fact);
+                    $('#upvote_button').click(function () {
+                        ref.child('votes').transaction(add1);
+                        db.child('total_votes').transaction(add1);
+                        $('#upvote_button').attr('disabled', 'disabled');
+                    });
+                    return true;
+                }
+                else {
+                    x -= fact.votes;
+                }
+            });
+        });
+    });
+
 
     auth = new FirebaseSimpleLogin(db, function(error, user) {
         if(user) {
@@ -39,7 +66,7 @@ function enableModerator() {
         var approve = document.createElement('button');
         approve.onclick = function() {
             db.child('facts').push({fact: txt, votes: 1});
-            db.child('total_votes').transaction(function(x) { return x + 1; });
+            db.child('total_votes').transaction(add1);
             ref.remove();
         };
         approve.innerHTML = "Approve";
